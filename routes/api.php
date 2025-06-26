@@ -10,3 +10,5 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [AuthorizationController::class, 'userRegister']);
 Route::post('/login', [AuthorizationController::class, 'login']);
+Route::post('auth/verifyEmail', [AuthorizationController::class, 'verifyEmail']);
+
