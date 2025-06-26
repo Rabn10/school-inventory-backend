@@ -78,4 +78,43 @@ class AuthorizationController extends Controller
             return response()->json(['error' => 'Registration failed: ' . $e->getMessage()], 500);
         }
     }
+
+    public function verifyEmail(Request $request)
+    {
+        try{
+            $id = $request->get('id');
+            $token = $request->get('token');
+            $user = User::where('id',$id)->first();
+
+            if(!$user) {
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'No data found'
+                ]);
+            }
+
+            if($user->email_verified_at !== null) {
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Email Already Verified'
+                ]);
+            }
+            if($user && $token !==null && $token === $user->email_verification_token) {
+                $user->email_verification_token = null;
+                $user->email_verified_at = Carbon::now();
+                $user->save();
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'Email Verified Successfully'
+                ]);
+            }
+            return response()->json([
+                'status' => 0,
+                'message' => 'Invalid User / Token'
+            ]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+    }
 }
