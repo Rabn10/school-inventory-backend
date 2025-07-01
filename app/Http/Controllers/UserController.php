@@ -27,8 +27,9 @@ class UserController extends Controller
             $user->save();
 
             return response()->json([
+                'status' => 1,
                 'message' => 'User updated successfully.',
-                'user' => $user
+                //'user' => $user
             ]);
         }
         catch(\Exception $e){
@@ -41,7 +42,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             return response()->json([
                 'message' => 'User retrieved successfully.',
-                'user' => $user
+                'data' => $user
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'User not found.'], 404);
