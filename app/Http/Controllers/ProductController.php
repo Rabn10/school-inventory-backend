@@ -13,7 +13,7 @@ class ProductController extends Controller
         try {
             $products = DB::table('products as p')
                         ->join('categories as c', 'p.category_id', '=', 'c.id')
-                        ->select('p.name as product_name', 'p.price','p.description','p.category_id','c.name as category_name')
+                        ->select('p.id','p.name as product_name', 'p.price','p.description','p.category_id','c.name as category_name')
                         ->where('p.delete_status', 1)
                         ->get();
             return response()->json([
