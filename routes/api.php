@@ -31,7 +31,7 @@ Route::prefix('category')->middleware('auth:sanctum')->group(function () {
     Route::delete('{id}', [CategoryController::class, 'destroy']);
 });
 
-Route::prefix('prodcut')->middleware('auth:sanctum')->group(function () {
+Route::prefix('product')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
     Route::post('/', [ProductController::class, 'store']);
     Route::put('{id}', [ProductController::class, 'update']);

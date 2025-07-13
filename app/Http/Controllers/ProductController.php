@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use DB;
 
 class ProductController extends Controller
 {
 
     public function index() {
         try {
-            $products = Product::where("delete_status", 1)->get();
+            $products = DB::table('products as p')
+                        ->join('categories as c', 'p.category_id', '=', 'c.id')
+                        ->select('p.name as product_name', 'p.price','p.description','p.category_id','c.name as category_name')
+                        ->where('p.delete_status', 1)
+                        ->get();
             return response()->json([
                 'status' => 1,
                 'data' => $products
