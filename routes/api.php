@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthorizationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VendorController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -37,6 +38,14 @@ Route::prefix('product')->middleware('auth:sanctum')->group(function () {
     Route::put('{id}', [ProductController::class, 'update']);
     Route::get('{id}', [ProductController::class, 'getOneProduct']);
     Route::delete('{id}', [ProductController::class, 'destroy']);
+});
+
+Route::prefix('vendor')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', [VendorController::class, 'index']);
+    Route::post('/', [VendorController::class, 'store']);
+    Route::put('{id}', [VendorController::class, 'update']);
+    Route::get('{id}', [VendorController::class, 'getOneVendor']);
+    Route::delete('{id}', [VendorController::class, 'destroy']);
 });
 
 

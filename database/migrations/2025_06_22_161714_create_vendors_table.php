@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
+            $table->string('company_name', 50);
+            $table->string('contact_person', 50);
             $table->string('address', 100);
             $table->string('phone', 20);
             $table->string('email', 50)->unique();
+            $table->string('website', 100)->nullable();
             $table->boolean('delete_status')->default(true);
             $table->timestamps();
         });
