@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\BatchController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -46,6 +47,14 @@ Route::prefix('vendor')->middleware('auth:sanctum')->group(function () {
     Route::put('{id}', [VendorController::class, 'update']);
     Route::get('{id}', [VendorController::class, 'getOneVendor']);
     Route::delete('{id}', [VendorController::class, 'destroy']);
+});
+
+Route::prefix('batch')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', [BatchController::class, 'index']);
+    Route::post('/', [BatchController::class, 'store']);
+    Route::put('{id}', [BatchController::class, 'update']);
+    Route::get('{id}', [BatchController::class, 'getOneBatch']);
+    Route::delete('{id}', [BatchController::class, 'destroy']);
 });
 
 
