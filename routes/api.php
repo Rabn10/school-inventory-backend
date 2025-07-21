@@ -59,7 +59,7 @@ Route::prefix('batch')->middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('order')->middleware('auth:sanctum')->group(function () {
-    Route::get('/{id}', [OrderController::class, 'index']);
+    Route::get('/', [OrderController::class, 'index']);
     Route::post('/', [OrderController::class, 'store']);
     Route::put('{id}', [BatchController::class, 'update']);
     //Route::get('{id}', [BatchController::class, 'getOneBatch']);
